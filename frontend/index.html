@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CacauFito — Diagnóstico Inteligente de Folhas de Cacau</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./static/style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-icon">🍃</span>
+        <div>
+          <h1>CacauFito</h1>
+          <p class="tagline">Classificação Fitossanitária com Inteligência Artificial</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <a href="./history.html" class="btn btn-secondary">Histórico</a>
+        <div id="service-status" class="service-status">
+          <span class="status-dot"></span>
+          <span class="status-text">Verificando API...</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <!-- Upload Section -->
+      <section class="card upload-card">
+        <div class="card-header">
+          <h2>Análise de Imagem</h2>
+          <p>Envie uma fotografia da folha de cacau para identificar se está saudável ou com sintomas de doenças.</p>
+        </div>
+
+        <form id="upload-form">
+          <div class="drop-zone" id="drop-zone">
+            <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/jpg" />
+            <div class="drop-zone-content">
+              <div class="upload-icon">📸</div>
+              <p class="drop-prompt"><strong>Clique para selecionar</strong> ou arraste a imagem aqui</p>
+              <span class="file-hint">Formatos suportados: JPEG, PNG, WEBP</span>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" id="submit-btn" class="btn btn-primary" disabled>
+              <span class="btn-spinner" hidden></span>
+              <span class="btn-text">Analisar Folha</span>
+            </button>
+            <button type="button" id="clear-btn" class="btn btn-secondary" hidden>Limpar</button>
+          </div>
+        </form>
+
+        <!-- Quick Samples Section -->
+        <div class="samples-section">
+          <p class="samples-title">Ou teste rapidamente com um exemplo:</p>
+          <div class="samples-grid">
+            <button type="button" class="sample-btn" data-sample="healthy_1.jpg" data-name="Folha Sadia">
+              <span class="sample-badge badge-healthy">Sadia</span>
+              <span class="sample-label">healthy_1.jpg</span>
+            </button>
+            <button type="button" class="sample-btn" data-sample="anthracnose_1.jpg" data-name="Antracnose">
+              <span class="sample-badge badge-anthracnose">Antracnose</span>
+              <span class="sample-label">anthracnose_1.jpg</span>
+            </button>
+            <button type="button" class="sample-btn" data-sample="cssvd_1.jpg" data-name="CSSVD">
+              <span class="sample-badge badge-cssvd">CSSVD</span>
+              <span class="sample-label">cssvd_1.jpg</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Preview & Result Section -->
+      <section class="card results-card" id="results-card" hidden>
+        <!-- Preview Box -->
+        <div class="preview-wrapper" id="preview-wrapper">
+          <img id="preview" alt="Pré-visualização da folha enviada" />
+          <div class="preview-meta" id="preview-meta"></div>
+        </div>
+
+        <!-- Dynamic Results -->
+        <div id="result" class="result-details" hidden>
+          <div class="diagnosis-header" id="diagnosis-header">
+            <div class="diagnosis-badge" id="diagnosis-badge">--</div>
+            <div class="diagnosis-info">
+              <h3 id="diagnosis-title">Diagnosticado</h3>
+              <p id="diagnosis-confidence">Confiança: --%</p>
+              <span id="uncertain-badge" class="uncertain-badge" hidden>⚠️ Resultado incerto</span>
+            </div>
+          </div>
+
+          <!-- Probability Distribution Bars -->
+          <div class="prob-section">
+            <h4>Distribuição de Probabilidade</h4>
+            <div class="prob-list" id="prob-list">
+              <!-- Dynamically filled by app.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Error Alert -->
+        <div id="error" class="alert-error" role="alert" hidden>
+          <span class="alert-icon">⚠️</span>
+          <span id="error-message"></span>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>CacauFito • Modelo de Visão Computacional (EfficientNet-B0) • Diagnóstico de Doenças em Cacau</p>
+    </footer>
+  </div>
+
+  <script src="./static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CacauFito — Histórico de Predições</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./static/style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-icon">🍃</span>
+        <div>
+          <h1>CacauFito</h1>
+          <p class="tagline">Histórico de Predições</p>
+        </div>
+      </div>
+      <a href="./" class="btn btn-secondary">← Analisar nova folha</a>
+    </header>
+
+    <main class="main-content">
+      <section class="card">
+        <div class="card-header">
+          <h2>Predições Recentes</h2>
+          <p>Últimas folhas analisadas pelo modelo, mais recentes primeiro.</p>
+        </div>
+
+        <div id="history-empty" class="history-empty" hidden>
+          Nenhuma predição registrada ainda. Analise uma folha para começar o histórico.
+        </div>
+
+        <div id="history-list" class="history-list"></div>
+
+        <div class="form-actions">
+          <button type="button" id="load-more-btn" class="btn btn-secondary" hidden>Carregar mais</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>CacauFito • Modelo de Visão Computacional (EfficientNet-B0) • Diagnóstico de Doenças em Cacau</p>
+    </footer>
+  </div>
+
+  <script src="./static/history.js"></script>
+</body>
+</html>
