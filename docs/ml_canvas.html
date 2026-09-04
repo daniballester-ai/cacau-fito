@@ -1,0 +1,399 @@
+<title>CacauFito Canvas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f1f4ec;
+    --paper: #fbfcf9;
+    --ink: #202b1c;
+    --ink-soft: #4c5a44;
+    --border: #1f2a1c;
+    --accent: #3f6b3d;
+    --accent-soft: #dce8d4;
+    --gold: #a97a2f;
+    --gold-soft: #f1e2c4;
+    --axis: #7a8c72;
+    --shadow: rgba(32, 43, 28, 0.14);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12160e;
+      --paper: #181e13;
+      --ink: #e9efe2;
+      --ink-soft: #b7c4ab;
+      --border: #cdd9c2;
+      --accent: #8fc584;
+      --accent-soft: #24331f;
+      --gold: #e0b567;
+      --gold-soft: #332a17;
+      --axis: #6f7d67;
+      --shadow: rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #12160e;
+    --paper: #181e13;
+    --ink: #e9efe2;
+    --ink-soft: #b7c4ab;
+    --border: #cdd9c2;
+    --accent: #8fc584;
+    --accent-soft: #24331f;
+    --gold: #e0b567;
+    --gold-soft: #332a17;
+    --axis: #6f7d67;
+    --shadow: rgba(0, 0, 0, 0.4);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Work Sans", system-ui, sans-serif;
+    padding: 2.2rem 2rem 3rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .sheet {
+    width: 100%;
+    max-width: 1180px;
+  }
+
+  .masthead {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.1rem;
+    padding-bottom: 0.7rem;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .masthead h1 {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 600;
+    font-size: 1.7rem;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .masthead .kicker {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .masthead .meta {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.98fr) minmax(0, 1.55fr);
+    grid-template-rows: auto repeat(4, 1fr);
+    gap: 0.85rem;
+  }
+
+  .box {
+    background: var(--paper);
+    border: 1.5px solid var(--border);
+    border-radius: 3px;
+    padding: 0.85rem 1rem 0.9rem;
+    position: relative;
+    box-shadow: 2px 2px 0 var(--shadow);
+  }
+
+  .box .num {
+    position: absolute;
+    top: -11px;
+    right: -11px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--paper);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 2px var(--paper);
+  }
+
+  .box h2 {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 600;
+    font-size: 0.98rem;
+    margin: 0 0 0.4rem;
+    letter-spacing: -0.005em;
+  }
+
+  .box p, .box li {
+    font-size: 0.82rem;
+    line-height: 1.42;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  .box ul {
+    margin: 0;
+    padding-left: 1.05rem;
+  }
+
+  .box li + li { margin-top: 0.3rem; }
+
+  .box strong { color: var(--ink); font-weight: 600; }
+
+  .tag {
+    display: inline-block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.68rem;
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 0.06rem 0.36rem;
+    border-radius: 2px;
+    font-weight: 600;
+  }
+
+  .arch-line {
+    margin-top: 0.4rem !important;
+    padding-top: 0.4rem;
+    border-top: 1px dashed var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  .arch-line .tag { white-space: nowrap; }
+
+  /* box 1 — problem, full width */
+  .box-problem { grid-column: 1 / 3; grid-row: 1; }
+  .box-problem h2 { font-size: 1.05rem; }
+  .box-problem p { font-size: 0.86rem; color: var(--ink); }
+
+  /* left column stack */
+  .box-sources { grid-column: 1; grid-row: 2; }
+  .box-target { grid-column: 1; grid-row: 3; }
+  .box-products { grid-column: 1; grid-row: 4; }
+  .box-pitch { grid-column: 1; grid-row: 5; }
+
+  /* right — attributes quadrant, spans rows 2-5 */
+  .box-attrs {
+    grid-column: 2;
+    grid-row: 2 / 6;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .box-attrs h2 { margin-bottom: 0.5rem; }
+
+  .quad {
+    flex: 1;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    border: 1px solid var(--axis);
+    min-height: 300px;
+  }
+
+  .quad::before, .quad::after {
+    content: "";
+    position: absolute;
+    background: var(--axis);
+  }
+  .quad::before { /* horizontal divider */
+    left: 0; right: 0; top: 50%; height: 1.5px; transform: translateY(-50%);
+  }
+  .quad::after { /* vertical divider */
+    top: 0; bottom: 0; left: 50%; width: 1.5px; transform: translateX(-50%);
+  }
+
+  .qcell {
+    padding: 0.6rem 0.7rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.32rem;
+  }
+
+  .qcell .item {
+    font-size: 0.78rem;
+    line-height: 1.3;
+  }
+
+  .qcell .item .lbl { font-weight: 600; color: var(--ink); }
+  .qcell .item .sub { color: var(--ink-soft); font-size: 0.72rem; display: block; }
+
+  .axis-label {
+    position: absolute;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--axis);
+    font-weight: 600;
+  }
+  .axis-top { top: -1.1rem; left: 50%; transform: translateX(-50%); }
+  .axis-bottom { bottom: -1.15rem; left: 50%; transform: translateX(-50%); }
+  .axis-left {
+    left: -1.55rem; top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    transform-origin: center;
+  }
+  .axis-right {
+    right: -1.75rem; top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    transform-origin: center;
+  }
+
+  .quad-wrap { position: relative; flex: 1; margin: 1.2rem 1.6rem 1.3rem; }
+
+  .footer-note {
+    margin-top: 1rem;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.68rem;
+    color: var(--ink-soft);
+    text-align: center;
+    letter-spacing: 0.02em;
+  }
+
+  @page {
+    size: landscape;
+    margin: 0.35in;
+  }
+
+  @media print {
+    body {
+      padding: 0;
+      background: var(--paper);
+      font-size: 0.62em;
+    }
+    .sheet { max-width: none; }
+    .masthead { margin-bottom: 0.4rem; padding-bottom: 0.3rem; }
+    .grid {
+      gap: 0.35rem;
+      grid-template-columns: minmax(0, 0.98fr) minmax(0, 1.55fr) !important;
+      grid-template-rows: auto repeat(4, auto) !important;
+    }
+    .box-problem { grid-column: 1 / 3 !important; grid-row: 1 !important; }
+    .box-sources { grid-column: 1 !important; grid-row: 2 !important; }
+    .box-target { grid-column: 1 !important; grid-row: 3 !important; }
+    .box-products { grid-column: 1 !important; grid-row: 4 !important; }
+    .box-pitch { grid-column: 1 !important; grid-row: 5 !important; }
+    .box-attrs { grid-column: 2 !important; grid-row: 2 / 6 !important; break-inside: avoid; }
+    .box {
+      box-shadow: none;
+      padding: 0.4rem 0.55rem 0.45rem;
+      break-inside: avoid;
+    }
+    .arch-line { margin-top: 0.3rem !important; padding-top: 0.3rem; }
+    .quad-wrap { margin: 0.6rem 1.2rem 0.7rem; break-inside: avoid; }
+    .quad { min-height: 150px; }
+    .box li + li { margin-top: 0.12rem; }
+    .footer-note { display: none; }
+  }
+
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+    .box-problem, .box-sources, .box-target, .box-products, .box-pitch, .box-attrs {
+      grid-column: 1; grid-row: auto;
+    }
+    .quad { min-height: 260px; }
+  }
+</style>
+
+<div class="sheet">
+  <div class="masthead">
+    <div>
+      <div class="kicker">ML / Data Project Canvas</div>
+      <h1>CacauFito</h1>
+    </div>
+    <div class="meta">Aprendizado Profundo · PPGTI<br>Baseado no ML Canvas (ownml.co)</div>
+  </div>
+
+  <div class="grid">
+
+    <div class="box box-problem">
+      <span class="num">1</span>
+      <h2>Qual o problema a ser resolvido?</h2>
+      <p>Cacauicultores não têm uma forma acessível de identificar pragas e doenças foliares do cacaueiro a partir de uma foto. A solução proposta usando visão computacional é um modelo que classifica a condição fitossanitária de uma folha de cacau — <strong>sadia</strong>, <strong>CSSVD</strong> ou <strong>antracnose</strong>.</p>
+    </div>
+
+    <div class="box box-sources">
+      <span class="num">2</span>
+      <h2>Fontes dos Dados</h2>
+      <ul>
+        <li><span class="tag">Amini Cocoa Contamination Dataset</span> — imagens de folha de cacau em campo, licença CC BY 4.0, hospedado no Kaggle.</li>
+        <li>iNaturalist.org — fonte complementar de fotos públicas de <em>Theobroma cacao</em>, para ampliar diversidade se necessário.</li>
+      </ul>
+    </div>
+
+    <div class="box box-target">
+      <span class="num">3</span>
+      <h2>Target</h2>
+      <p><span class="tag">class</span> — condição da folha, 3 categorias mutuamente exclusivas por imagem: <strong>sadia</strong>, <strong>CSSVD</strong> (vírus do inchaço do broto) e <strong>antracnose</strong>. O modelo aprende a mapear a imagem da folha à classe mais provável.</p>
+    </div>
+
+    <div class="box box-products">
+      <span class="num">4</span>
+      <h2>Produtos de Dados</h2>
+      <p>Modelo de classificação de imagem servido por uma API de inferência, que recebe a foto de uma folha e retorna a condição prevista com grau de confiança. Frontend simples para envio da foto e visualização do resultado, sem login.</p>
+      <p class="arch-line"><strong>Arquitetura:</strong> <span class="tag">Dataset</span> → <span class="tag">EfficientNet-B0</span> → <span class="tag">API FastAPI</span> → <span class="tag">Frontend</span></p>
+    </div>
+
+    <div class="box box-pitch">
+      <span class="num">5</span>
+      <h2>Direcionadores PITCH</h2>
+      <ul>
+        <li><strong>Oportunidade:</strong> triagem visual acessível de condição fitossanitária, direto do celular do produtor.</li>
+        <li><strong>Buscando:</strong> validar se transfer learning com dados públicos já basta para distinguir as classes.</li>
+        <li><strong>Vantagem:</strong> pipeline desacoplado (dados → treino → inferência → frontend), pronto para dados do Sul da Bahia no futuro.</li>
+      </ul>
+    </div>
+
+    <div class="box box-attrs">
+      <span class="num">6</span>
+      <h2>Principais Atributos (variáveis)</h2>
+      <p style="margin-bottom: 0.3rem;">Diferente de um problema tabular, o atributo de entrada é a <strong>imagem inteira</strong> da folha — a rede convolucional extrai automaticamente os padrões visuais relevantes (textura, cor, lesões).</p>
+
+      <div class="quad-wrap">
+        <span class="axis-label axis-top">Mais fácil de obter</span>
+        <span class="axis-label axis-bottom">Mais difícil de obter</span>
+        <span class="axis-label axis-left">Concreto</span>
+        <span class="axis-label axis-right">Subjetivo</span>
+
+        <div class="quad">
+          <div class="qcell">
+            <div class="item"><span class="lbl">Foto da folha</span><span class="sub">câmera de celular, em campo</span></div>
+            <div class="item"><span class="lbl">Data e local</span><span class="sub">metadados da captura</span></div>
+          </div>
+          <div class="qcell">
+            <div class="item"><span class="lbl">Variedade do cacaueiro</span><span class="sub">nem sempre identificável na foto</span></div>
+          </div>
+          <div class="qcell">
+            <div class="item"><span class="lbl">Dataset já rotulado</span><span class="sub">depende de terceiros disponibilizarem</span></div>
+          </div>
+          <div class="qcell">
+            <div class="item"><span class="lbl">Condição correta da folha</span><span class="sub">requer conhecimento fitopatológico</span></div>
+            <div class="item"><span class="lbl">Estágio/severidade</span><span class="sub">progressão da doença</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-note">Canvas Business Machine Learning © Fabiano Castello 2017 — adaptado para o projeto CacauFito</div>
+</div>
