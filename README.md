@@ -10,7 +10,7 @@ Projeto duplo: entrega prática das disciplinas **Aprendizado Profundo** (treino
 - **API de inferência**: FastAPI (`src/inference_service/`) — `POST /predict`, `GET /history`, `GET /stats`, `GET /health`.
 - **Frontend**: upload de imagem + histórico de predições, servido pela própria API (`frontend/`).
 - **Specs**: todo o projeto foi especificado com SDD — [OpenSpec](openspec/) para o modelo, histórico de predições e sinalização de resultado incerto; [GitHub Spec Kit](specs/) para a feature de estatísticas (comparação em [`docs/comparacao_sdd_tools.md`](docs/comparacao_sdd_tools.md)).
-- **Docs**: [ML Canvas](docs/ml_canvas.md), [escopo e justificativa SDD](docs/escopo.md), [limitações e próximos passos](docs/limitations_and_next_steps.md).
+- **Docs**: [ML Canvas](docs/ml_canvas.md), [escopo e justificativa SDD](docs/escopo.md), [limitações e próximos passos](docs/limitations_and_next_steps.md), [checkpoint humano](docs/checkpoint_humano.md), [relatório final](docs/relatorio_final.md).
 
 ## Como rodar
 

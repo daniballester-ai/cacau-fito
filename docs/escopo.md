@@ -10,7 +10,7 @@
 1. Uma predição bem-sucedida é registrada automaticamente, sem afetar a resposta ao cliente mesmo se o registro falhar.
 2. Um cliente lista o histórico paginado, mais recente primeiro; com histórico vazio, a listagem retorna vazia em vez de erro.
 
-**Por que é um bom caso para SDD:** tem regra de negócio real (o que gravar, quando falhar sem quebrar `/predict`, retenção limitada para não crescer sem limite), casos de borda concretos (upload rejeitado não deve gerar entrada, falha de storage não deve derrubar a predição, histórico vazio) e mexe em múltiplos arquivos e camadas (novo módulo de storage, integração no handler de `/predict`, novo endpoint, nova página de frontend) — não é uma mudança trivial de um único arquivo.
+**Por que é um bom caso para SDD:** A funcionalidade tem regras de negócio reais — o que gravar, quando não gravar, e um limite de retenção para não crescer sem parar. Ela também tem casos de borda concretos: upload rejeitado não deve gerar entrada, falha de storage não deve derrubar a predição, e histórico vazio precisa de tratamento próprio. Além disso, mexe em múltiplos arquivos e camadas ao mesmo tempo — um novo módulo de storage, a integração no handler de `/predict`, um novo endpoint e uma nova página de frontend. Por isso não é uma mudança trivial de um único arquivo, e se beneficia de ter os requisitos e critérios de aceite escritos antes de começar a codificar.
 
 ## Funcionalidade 2 — Sinalização de resultado incerto (limiar de confiança)
 
@@ -21,7 +21,7 @@
 2. Uma predição com confiança aceitável, mas com as duas classes top muito próximas, também é sinalizada como incerta (`uncertainty_reason: "close_call"`) — o caso de borda que motiva a funcionalidade.
 3. Uma predição confiante continua sendo exibida exatamente como antes, sem nenhum indicador.
 
-**Por que é um bom caso para SDD:** tem uma regra de negócio não trivial com dois critérios independentes e uma ordem de precedência definida entre eles (documentada no `design.md`), um caso de borda central que motiva a própria funcionalidade (a disputa acirrada entre classes, que um limiar simples de confiança não capturaria sozinho), e é uma mudança aditiva que precisa preservar contrato existente em duas capabilities já implementadas (`leaf-inference-service` e `leaf-upload-frontend`) sem quebrá-las — testável objetivamente por casos.
+**Por que é um bom caso para SDD:** A regra de negócio não é trivial — são dois critérios independentes (confiança baixa e disputa acirrada), com uma ordem de precedência definida entre eles quando os dois ocorrem juntos. Existe um caso de borda central que motiva a própria funcionalidade: a disputa acirrada entre classes, que um limiar simples de confiança sozinho não capturaria. A mudança também é aditiva sobre contrato já existente em duas capabilities já implementadas (`leaf-inference-service` e `leaf-upload-frontend`), então precisa preservar o comportamento anterior sem quebrá-lo. Cada uma dessas regras vira um cenário Given/When/Then testável objetivamente, o que torna a especificação prévia diretamente verificável no código.
 
 ## Artefatos
 

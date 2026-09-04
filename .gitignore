@@ -26,3 +26,6 @@ Thumbs.db
 
 # Spec Kit local state (per-machine, not part of the spec artifacts)
 .specify/feature.json
+.gitignore
+Cacaufito.code-workspace
+
