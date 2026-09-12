@@ -6,6 +6,18 @@ Repositório de entrega das disciplinas **Tópicos Avançados em Engenharia de S
 
 > O treino do modelo (notebook, canvas de ML, vídeo de pitch) é a entrega da disciplina **Aprendizagem Profunda**, mantida no repositório irmão [cacau_fito_DL](https://github.com/daniballester-ai/cacau_fito_DL) — este repositório compartilha o mesmo código, mas com foco em engenharia de software.
 
+## Entregáveis (Projeto Final — Desenvolvimento de Software com IA)
+
+- **Repositório**: este mesmo repositório — [github.com/daniballester-ai/cacau-fito](https://github.com/daniballester-ai/cacau-fito), histórico de commits real.
+- **Apresentação**: [HTML animado (D3.js)](decks/2026-09-12%20cacaufito-projeto-final/index.html) e [versão em PDF](decks/2026-09-12%20cacaufito-projeto-final/cacaufito-projeto-final.pdf) (20 slides).
+- **Documento de entrega** (nomes, links de repositório/apresentação/LinkedIn): [`docs/documento_entrega_final.md`](docs/documento_entrega_final.md).
+- **Documento de modelos, ferramentas e estratégias de IA**: [`docs/ferramentas_ia.md`](docs/ferramentas_ia.md).
+- **Posts no LinkedIn (método STAR)**: [Danielle](https://www.linkedin.com/feed/update/urn:li:share:7504519441762828288/) · [Jales](https://www.linkedin.com/feed/update/urn:li:activity:7504523565770383361/) — textos-base em [`docs/linkedin_post.md`](docs/linkedin_post.md) e [`docs/linkedin_post_jales.md`](docs/linkedin_post_jales.md).
+- **SDD (specs)**: [OpenSpec](openspec/) e [GitHub Spec Kit](specs/), comparados em [`docs/comparacao_sdd_tools.md`](docs/comparacao_sdd_tools.md).
+- **Harness e guardrails**: [evidência de guardrail real](docs/guardrail_evidence.md), [log de sessão do agente](docs/agent_session_log.md), regras em [`.claude/settings.json`](.claude/settings.json).
+- **Arquitetura**: [ADRs](docs/adr/) e [diagrama de arquitetura](docs/architecture-diagram.md) (C4 + fluxo + sequência).
+- **Relatório final** (aprendizados, o que faríamos diferente): [`docs/relatorio_final.md`](docs/relatorio_final.md).
+
 ## O que tem aqui
 
 - **Modelo**: EfficientNet-B0 (transfer learning), treinado sobre o [Amini Cocoa Contamination Dataset](https://www.kaggle.com/datasets/ohagwucollinspatrick/amini-cocoa-contamination-dataset) (CC BY 4.0), 78,1% de acurácia no teste, com hiperparâmetros (`lr`, `weight_decay`) escolhidos por busca com Optuna. Notebook e detalhes de treino no repositório [cacau_fito_DL](https://github.com/daniballester-ai/cacau_fito_DL).
