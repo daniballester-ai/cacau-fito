@@ -29,26 +29,31 @@ Nenhum endpoint novo entra em produção só porque os testes automatizados pass
 | Histórico de predições (paginado, com retenção) | [`openspec/specs/prediction-history`](openspec/specs/prediction-history/) | `tests/test_history*.py` |
 | Estatísticas agregadas (`GET /stats`) | [`specs/001-prediction-stats`](specs/001-prediction-stats/) (Spec Kit) | `tests/test_stats*.py` |
 | Otimização de hiperparâmetros do treino (Optuna) | mudança arquivada em [`openspec/changes/archive/2026-09-11-add-optuna-tuning-notebook/`](openspec/changes/archive/2026-09-11-add-optuna-tuning-notebook/) | verificação manual no notebook (ver repo DL) |
-
-**Especificados, implementação em andamento** (completam os 10 requisitos funcionais do projeto final):
-
-| Funcionalidade | Spec |
-|---|---|
-| Feedback do usuário sobre o diagnóstico | [`openspec/changes/add-diagnosis-feedback`](openspec/changes/add-diagnosis-feedback/) |
-| Exportação do histórico em CSV | [`openspec/changes/add-history-csv-export`](openspec/changes/add-history-csv-export/) |
-| Autenticação de usuário (multi-usuário) | [`openspec/changes/add-user-authentication`](openspec/changes/add-user-authentication/) |
-| Dashboard de estatísticas (série temporal) | [`openspec/changes/add-stats-dashboard`](openspec/changes/add-stats-dashboard/) |
-| Deploy containerizado (Docker) | [`openspec/changes/add-docker-deployment`](openspec/changes/add-docker-deployment/) |
-| Documentação interativa de API | [`openspec/changes/add-interactive-api-docs`](openspec/changes/add-interactive-api-docs/) |
+| Feedback do usuário sobre o diagnóstico (`POST /predict/{id}/feedback`) | [`openspec/changes/add-diagnosis-feedback`](openspec/changes/add-diagnosis-feedback/) | `tests/test_feedback*.py` |
+| Exportação do histórico em CSV (`GET /history/export.csv`) | [`openspec/changes/add-history-csv-export`](openspec/changes/add-history-csv-export/) | `tests/test_history_export*.py` |
+| Autenticação de usuário multi-usuário (registro, login, sessão, escopo por usuário) | [`openspec/changes/add-user-authentication`](openspec/changes/add-user-authentication/) | `tests/test_auth*.py` |
+| Dashboard de estatísticas (série temporal por dia/classe) | [`openspec/changes/add-stats-dashboard`](openspec/changes/add-stats-dashboard/) | `tests/test_stats_timeseries*.py` |
+| Deploy containerizado (Docker + Compose, volumes, fail-fast) | [`openspec/changes/add-docker-deployment`](openspec/changes/add-docker-deployment/) | verificação manual com `docker compose` (ver spec) |
+| Documentação interativa de API (`/docs`, `/redoc`) | [`openspec/changes/add-interactive-api-docs`](openspec/changes/add-interactive-api-docs/) | verificação manual dos schemas OpenAPI |
 
 ## Como rodar
 
+**Com Docker (recomendado):**
+
 ```bash
-python -m pip install fastapi "uvicorn[standard]" python-multipart torch torchvision pillow
+docker compose up
+```
+
+Sobe a API já com o modelo treinado (`models/`) e o histórico de predições (`history/`) montados como volumes do host — o histórico persiste entre reinícios do container. Se `models/` estiver vazio ou faltando o modelo treinado, o container falha rápido no startup em vez de subir servindo requisições quebradas.
+
+**Sem Docker:**
+
+```bash
+python -m pip install fastapi "uvicorn[standard]" python-multipart torch torchvision pillow bcrypt
 python -m uvicorn src.inference_service.main:app --reload
 ```
 
-Abra `http://127.0.0.1:8000` no navegador. Imagens de exemplo em [`samples/`](samples/).
+Abra `http://127.0.0.1:8000` no navegador. Um visitante sem sessão é redirecionado para `login.html`; crie uma conta e entre para analisar folhas e ver seu histórico (cada conta só vê suas próprias predições). Imagens de exemplo em [`samples/`](samples/).
 
 ## Testes
 
