@@ -6,6 +6,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from src.inference_service import history, main
+from tests.conftest import authenticate
 
 SAMPLE_IMAGE = os.path.join(os.path.dirname(__file__), "..", "samples", "healthy_1.jpg")
 
@@ -25,6 +26,7 @@ def test_predict_succeeds_even_if_history_recording_fails(monkeypatch):
     monkeypatch.setattr(main.history, "record_prediction", broken_record_prediction)
 
     client = TestClient(main.app)
+    authenticate(client)
     with open(SAMPLE_IMAGE, "rb") as f:
         response = client.post("/predict", files={"file": ("leaf.jpg", f, "image/jpeg")})
 

@@ -5,6 +5,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from src.inference_service import history, main
+from tests.conftest import authenticate
 
 SAMPLE_IMAGES = [
     os.path.join(os.path.dirname(__file__), "..", "samples", "healthy_1.jpg"),
@@ -23,7 +24,9 @@ def isolated_storage(tmp_path, monkeypatch):
 
 @pytest.fixture
 def client():
-    return TestClient(main.app)
+    client = TestClient(main.app)
+    authenticate(client)
+    return client
 
 
 def _predict(client, image_path):
