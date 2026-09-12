@@ -29,3 +29,16 @@ Thumbs.db
 .gitignore
 Cacaufito.code-workspace
 
+# Mira Animator tooling (local presentation-authoring tool, not part of the deliverable).
+# The finished deck/video under decks/<name>/ IS the deliverable and stays tracked;
+# only Mira's own installed skills/templates/config are excluded here.
+.claude/skills/mira-*/
+.claude/skills/_shared/
+.claude/workflows/mira-*.js
+.claude/settings.json
+.mira/
+mira-templates/
+mira-plugins/
+mira.config.json
+*.uvicorn.log
+
