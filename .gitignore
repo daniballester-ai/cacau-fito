@@ -32,10 +32,12 @@ Cacaufito.code-workspace
 # Mira Animator tooling (local presentation-authoring tool, not part of the deliverable).
 # The finished deck/video under decks/<name>/ IS the deliverable and stays tracked;
 # only Mira's own installed skills/templates/config are excluded here.
+# NOTE: .claude/settings.json is intentionally NOT ignored — it now holds the
+# project's real permission guardrails (docs/guardrail_evidence.md), which must
+# stay tracked as evidence, not just Mira's own hook config.
 .claude/skills/mira-*/
 .claude/skills/_shared/
 .claude/workflows/mira-*.js
-.claude/settings.json
 .mira/
 mira-templates/
 mira-plugins/
