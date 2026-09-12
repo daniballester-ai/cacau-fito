@@ -13,6 +13,7 @@ Repositório de entrega das disciplinas **Tópicos Avançados em Engenharia de S
 - **Frontend**: upload de imagem + histórico de predições, servido pela própria API (`frontend/`).
 - **Specs**: todo o projeto foi especificado com SDD — [OpenSpec](openspec/) para o modelo, histórico de predições e sinalização de resultado incerto; [GitHub Spec Kit](specs/) para a feature de estatísticas (comparação em [`docs/comparacao_sdd_tools.md`](docs/comparacao_sdd_tools.md)).
 - **Docs**: [ML Canvas](docs/ml_canvas.md), [escopo e justificativa SDD](docs/escopo.md), [limitações e próximos passos](docs/limitations_and_next_steps.md), [checkpoint humano](docs/checkpoint_humano.md), [relatório final](docs/relatorio_final.md).
+- **Arquitetura e processo assistido por IA**: [diagrama de arquitetura](docs/architecture-diagram.md), [ADRs](docs/adr/), [evidência de guardrail real](docs/guardrail_evidence.md), [log de sessão do agente](docs/agent_session_log.md), [modelos/ferramentas/estratégias de IA](docs/ferramentas_ia.md).
 
 ## Checkpoint humano (SDD)
 
@@ -28,6 +29,17 @@ Nenhum endpoint novo entra em produção só porque os testes automatizados pass
 | Histórico de predições (paginado, com retenção) | [`openspec/specs/prediction-history`](openspec/specs/prediction-history/) | `tests/test_history*.py` |
 | Estatísticas agregadas (`GET /stats`) | [`specs/001-prediction-stats`](specs/001-prediction-stats/) (Spec Kit) | `tests/test_stats*.py` |
 | Otimização de hiperparâmetros do treino (Optuna) | mudança arquivada em [`openspec/changes/archive/2026-09-11-add-optuna-tuning-notebook/`](openspec/changes/archive/2026-09-11-add-optuna-tuning-notebook/) | verificação manual no notebook (ver repo DL) |
+
+**Especificados, implementação em andamento** (completam os 10 requisitos funcionais do projeto final):
+
+| Funcionalidade | Spec |
+|---|---|
+| Feedback do usuário sobre o diagnóstico | [`openspec/changes/add-diagnosis-feedback`](openspec/changes/add-diagnosis-feedback/) |
+| Exportação do histórico em CSV | [`openspec/changes/add-history-csv-export`](openspec/changes/add-history-csv-export/) |
+| Autenticação de usuário (multi-usuário) | [`openspec/changes/add-user-authentication`](openspec/changes/add-user-authentication/) |
+| Dashboard de estatísticas (série temporal) | [`openspec/changes/add-stats-dashboard`](openspec/changes/add-stats-dashboard/) |
+| Deploy containerizado (Docker) | [`openspec/changes/add-docker-deployment`](openspec/changes/add-docker-deployment/) |
+| Documentação interativa de API | [`openspec/changes/add-interactive-api-docs`](openspec/changes/add-interactive-api-docs/) |
 
 ## Como rodar
 
