@@ -1,8 +1,12 @@
 """Ad-hoc verification of the inference service using FastAPI's TestClient
 (no real server process needed) — exercises the spec scenarios directly:
 valid image -> label+confidence, unsupported input -> clear error, not a crash.
+
+Authenticates first: /predict is a protected endpoint since add-user-authentication
+(BREAKING change — see openspec/changes/add-user-authentication/proposal.md).
 """
 import os
+import uuid
 
 from fastapi.testclient import TestClient
 
@@ -13,6 +17,15 @@ client = TestClient(app)
 DATA_ROOT = os.path.join(os.path.dirname(__file__), "..", "..", "data", "amini")
 SAMPLE_IMAGE = os.path.join(DATA_ROOT, "dataset", "images", "train", "ID_cxnsIb.JPG")
 EXPECTED_LABEL = "cssvd"
+
+print("== authenticate ==")
+identifier = f"verify_api_{uuid.uuid4().hex}@example.com"
+password = "verify-api-password"
+r = client.post("/auth/register", json={"identifier": identifier, "password": password})
+assert r.status_code == 200, r.text
+r = client.post("/auth/login", json={"identifier": identifier, "password": password})
+assert r.status_code == 200, r.text
+print(f"Logged in as {identifier}")
 
 print("== /health ==")
 r = client.get("/health")
