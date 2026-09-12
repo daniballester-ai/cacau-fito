@@ -18,10 +18,10 @@ Apresentação interativa (HTML animado, D3.js), em `decks/2026-09-12 cacaufito-
 
 ## Post no LinkedIn (método STAR)
 
-**Danielle:** [PREENCHER LINK APÓS PUBLICAR]
-**Jales:** [PREENCHER LINK APÓS PUBLICAR]
+**Danielle:** https://www.linkedin.com/feed/update/urn:li:share:7504519441762828288/
+**Jales:** https://www.linkedin.com/feed/update/urn:li:activity:7504523565770383361/
 
-*(textos prontos em `docs/linkedin_post.md` e `docs/linkedin_post_jales.md`; publicar antes da apresentação e atualizar este documento com os links reais)*
+*(textos-base em `docs/linkedin_post.md` e `docs/linkedin_post_jales.md`)*
 
 ## Documento de modelos, ferramentas e estratégias de IA
 
