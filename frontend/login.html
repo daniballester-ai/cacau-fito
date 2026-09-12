@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CacauFito — Entrar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./static/style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-icon">🍃</span>
+        <div>
+          <h1>CacauFito</h1>
+          <p class="tagline">Classificação Fitossanitária com Inteligência Artificial</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <section class="card upload-card">
+        <div class="card-header">
+          <h2 id="form-title">Entrar</h2>
+          <p>Entre com sua conta para analisar folhas e acompanhar seu histórico.</p>
+        </div>
+
+        <form id="auth-form">
+          <div class="form-actions" style="flex-direction: column; align-items: stretch; gap: 12px;">
+            <input type="text" id="identifier" placeholder="E-mail ou usuário" required
+              style="padding: 10px; border-radius: 8px; border: 1px solid #ccc;" />
+            <input type="password" id="password" placeholder="Senha" required
+              style="padding: 10px; border-radius: 8px; border: 1px solid #ccc;" />
+          </div>
+          <div id="auth-error" class="alert-error" role="alert" hidden>
+            <span class="alert-icon">⚠️</span>
+            <span id="auth-error-message"></span>
+          </div>
+          <div class="form-actions">
+            <button type="submit" id="submit-btn" class="btn btn-primary">Entrar</button>
+            <button type="button" id="toggle-mode-btn" class="btn btn-secondary">Criar conta</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>CacauFito • Modelo de Visão Computacional (EfficientNet-B0) • Diagnóstico de Doenças em Cacau</p>
+    </footer>
+  </div>
+
+  <script src="./static/login.js"></script>
+</body>
+</html>

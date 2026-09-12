@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CacauFito — Histórico de Predições</title>
+  <title>CacauFito — Dashboard de Estatísticas</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./static/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 </head>
 <body>
   <div class="app-container">
@@ -16,10 +17,11 @@
         <span class="brand-icon">🍃</span>
         <div>
           <h1>CacauFito</h1>
-          <p class="tagline">Histórico de Predições</p>
+          <p class="tagline">Dashboard de Estatísticas</p>
         </div>
       </div>
       <div class="header-actions">
+        <a href="./history.html" class="btn btn-secondary">Histórico</a>
         <a href="./" class="btn btn-secondary">← Analisar nova folha</a>
         <button type="button" id="logout-btn" class="btn btn-secondary">Sair</button>
       </div>
@@ -28,19 +30,24 @@
     <main class="main-content">
       <section class="card">
         <div class="card-header">
-          <h2>Predições Recentes</h2>
-          <p>Últimas folhas analisadas pelo modelo, mais recentes primeiro.</p>
+          <h2>Distribuição de Diagnósticos</h2>
+          <p>Total de predições registradas, por classe.</p>
         </div>
-
-        <div id="history-empty" class="history-empty" hidden>
-          Nenhuma predição registrada ainda. Analise uma folha para começar o histórico.
+        <div id="totals-empty" class="history-empty" hidden>
+          Nenhuma predição registrada ainda. Analise uma folha para começar a ver estatísticas.
         </div>
+        <div id="totals-list" class="history-list"></div>
+      </section>
 
-        <div id="history-list" class="history-list"></div>
-
-        <div class="form-actions">
-          <button type="button" id="load-more-btn" class="btn btn-secondary" hidden>Carregar mais</button>
+      <section class="card">
+        <div class="card-header">
+          <h2>Evolução ao Longo do Tempo</h2>
+          <p>Predições por dia, por classe.</p>
         </div>
+        <div id="chart-empty" class="history-empty" hidden>
+          Ainda não há dados suficientes para exibir um gráfico de evolução.
+        </div>
+        <canvas id="timeseries-chart" height="120"></canvas>
       </section>
     </main>
 
@@ -51,6 +58,6 @@
 
   <script src="./static/auth-guard.js"></script>
   <script src="./static/logout.js"></script>
-  <script src="./static/history.js"></script>
+  <script src="./static/dashboard.js"></script>
 </body>
 </html>
