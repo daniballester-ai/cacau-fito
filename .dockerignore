@@ -1,0 +1,15 @@
+data/amini/dataset/
+.git/
+history/
+notebooks/
+tests/
+openspec/
+specs/
+docs/
+decks/
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+models/

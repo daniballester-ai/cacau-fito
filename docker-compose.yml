@@ -1,0 +1,8 @@
+services:
+  cacaufito:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models
+      - ./history:/app/history
