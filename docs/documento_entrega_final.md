@@ -14,7 +14,7 @@
 
 ## Apresentação
 
-Apresentação interativa (HTML animado, D3.js), em `decks/2026-09-12 cacaufito-projeto-final/index.html` no repositório acima — cobre contexto/motivação, processo de SDD, harness e guardrails, arquitetura (ADRs + diagrama), ferramentas de IA, demonstração funcional, resultados e aprendizados.
+Apresentação interativa (HTML animado, D3.js), em `decks/2026-09-12 cacaufito-projeto-final/index.html` no repositório acima — cobre contexto/motivação, processo de SDD, harness e guardrails, arquitetura (ADRs + diagrama), ferramentas de IA, demonstração funcional, resultados e aprendizados. Versão em PDF (20 slides) em `decks/2026-09-12 cacaufito-projeto-final/cacaufito-projeto-final.pdf`.
 
 ## Post no LinkedIn (método STAR)
 
