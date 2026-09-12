@@ -61,7 +61,7 @@ Sobe a API já com o modelo treinado (`models/`) e o histórico de predições (
 **Sem Docker:**
 
 ```bash
-python -m pip install fastapi "uvicorn[standard]" python-multipart torch torchvision pillow bcrypt
+python -m pip install -r requirements.txt
 python -m uvicorn src.inference_service.main:app --reload
 ```
 
